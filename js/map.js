@@ -22,7 +22,7 @@ function draw_map(map,$canvas){
 
 function draw(xx,yy,value,$canvas){
 	var drawing=$canvas[0];
-	var color = ["black","skyblue","red","purple","green"];
+	var color = ["#444444","#E6E6E6","#e54304","#0013e9","#61d800"];
 	//# 0墙壁不可通过(0)
 	//# 1可通过(+)
 	//# 2火灾不可通过并有排斥力(-)
@@ -54,6 +54,15 @@ for(l=maps.length-1;l>=0;l--){
 	$("body").append($canvas);
 	draw_map(maps[l],$canvas);
 	if(l!=0) $("#side").append( $("<br>") );
+}
+console.log(way);
+for(i=0;i<way.length;i++){
+	way[i] = way[i].replace("(","[");
+	way[i] = way[i].replace(")","]");
+	way[i] = eval(way[i]);
+	var pos=way[i];
+	console.log(i,pos,pos[2]);
+	draw(pos[0],pos[1],4,$( ("#canvas"+(pos[2]-1)) ));
 }
 
 $("canvas").click(function(){
